@@ -3,7 +3,8 @@
 A reproducible-research project template made by Claude Opus 4.7. It combines structures from 
 three repositories:
 
-1. **A working pipeline** — Snakemake DAG, Conda environments, Pandoc-rendered HTML/PDF/DOCX report, pytest, GitHub Actions CI/CD that re-runs every push. Adapted from [`timtroendle/cookiecutter-reproducible-research`](https://github.com/timtroendle/cookiecutter-reproducible-research).
+1. **A working pipeline** — Snakemake DAG, Conda environments, Pandoc-rendered HTML/PDF/DOCX report, pytest, GitHub Actions CI/CD that re-runs every push. Adapted from [`timtroendle/cookiecutter-reproducible-research`](https://github.com/timtroendle/cookiecutter-reproducible-research) with some inspiration 
+from [FedericoTartarini/reproducible-research](https://github.com/FedericoTartarini/reproducible-research).
 2. **A living wiki** — Obsidian-compatible knowledge base (`wiki/`) with topic, concept, group, synthesis, query, entity, and research-evaluation pages. Append-only event log + state file. Adapted from [`andrehuang/researcher-pack`](https://github.com/andrehuang/researcher-pack).
 3. **An LLM research loop** — `paper-read`, `lit-search`, `research-companion`, `weekly-review`, `orchestrate`, `vault-sync` skills with eager invocation. Three sub-agents (brainstormer, idea-critic, research-strategist) for divergence, critique, and strategy. Hook-based bookkeeping that auto-commits if you opt in.
 
