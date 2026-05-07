@@ -1,6 +1,7 @@
 # generated files
 build/
 archive/
+.worktrees/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
