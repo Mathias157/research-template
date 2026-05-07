@@ -36,12 +36,11 @@ You (the LLM) operate inside this repo. Read this file first, then follow it.
 │   ├── research-evaluations/   # PURSUE/PARK/KILL verdicts from research-companion
 │   ├── entities/               # Optional deep-read paper pages
 │   ├── sources/{papers,notes}/ # Raw source material
+│   ├── .vault-mirror/          # READ-ONLY mirror from primary Obsidian vault
 │   ├── wiki.schema.md          # Page-type definitions and operations
 │   ├── AGENTS.md               # Wiki-specific agent protocol
 │   ├── index.md                # Content catalog
 │   └── log.md                  # Append-only operation log
-│
-├── vault-mirror/               # READ-ONLY mirror from primary Obsidian vault
 │
 ├── # Snakemake side
 ├── Snakefile                   # The DAG: data -> analysis -> report + tests
@@ -104,12 +103,12 @@ When ingesting a paper:
 
 ### Vault-Mirror Discipline
 
-`vault-mirror/` is a one-way mirror of the user's primary Obsidian vault
+`wiki/.vault-mirror/` is a one-way mirror of the user's primary Obsidian vault
 (typically `~/Documents/OneDrive/obs-notes/02 - Projects/<project>/`). The mirror
 is configured in `research-state.yaml` under `vault_sync:`, populated by
 `hooks/vault_sync.sh`, and surfaced by the `vault-sync` skill.
 
-**NEVER edit files inside `vault-mirror/`.** Any edits are overwritten on the
+**NEVER edit files inside `wiki/.vault-mirror/`.** Any edits are overwritten on the
 next sync. Use it as **input material**: grep it for keywords, cite findings in
 wiki pages, surface insights when relevant.
 

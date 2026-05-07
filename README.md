@@ -36,7 +36,7 @@ should I work on?".
 ├── hooks/                      # research_hook.sh, auto_commit.sh, vault_sync.sh
 ├── principles/                 # academic-writing.md, research-strategy.md
 ├── wiki/                       # Knowledge base (Obsidian vault)
-├── vault-mirror/               # READ-ONLY mirror of primary Obsidian vault
+│   └── .vault-mirror/          # READ-ONLY mirror of primary Obsidian vault
 ├── Snakefile + scripts/ + tests/ + report/
 ├── pixi.toml + pixi.lock       # Environment + dependency lockfile
 ├── research-state.yaml         # State (read on session start)
@@ -63,9 +63,9 @@ should I work on?".
        wiki/entities   evaluations         (graduates →
                                             topics/syntheses)
 
-   weekly-review reads events.jsonl + state + git log
-   vault-sync mirrors primary vault → vault-mirror/
-   research_hook.sh logs every write & queues auto-commit
+    weekly-review reads events.jsonl + state + git log
+    vault-sync mirrors primary vault → wiki/.vault-mirror/
+    research_hook.sh logs every write & queues auto-commit
 ```
 
 ## Eager Invocation
@@ -98,7 +98,7 @@ this repo's `vault-sync` at it:
 vault_sync:
   primary_vault: "~/Documents/OneDrive/obs-notes"
   project_path_in_vault: "02 - Projects/MyProject"
-  mirror_target: "vault-mirror"
+  mirror_target: "wiki/.vault-mirror"
 ```
 
 Then run `bash hooks/vault_sync.sh` (or invoke the `vault-sync` skill in

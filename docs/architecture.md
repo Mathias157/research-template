@@ -51,7 +51,7 @@ The skills shipped:
 | `research-companion` | "brainstorm", "what if", "evaluate this idea" | wiki/research-evaluations + state |
 | `weekly-review` | "weekly review", "progress check" | digest event + suggested priorities |
 | `orchestrate` | "parallel review", multi-angle task | synthesis from multiple sub-agents |
-| `vault-sync` | "sync from vault", briefing reports drift | refreshed `vault-mirror/` |
+| `vault-sync` | "sync from vault", briefing reports drift | refreshed `wiki/.vault-mirror/` |
 
 ## Layer 2 — Shared State
 
@@ -107,7 +107,7 @@ Three shell scripts in `hooks/`:
   `.autocommit.enabled` marker file.
 
 - **`vault_sync.sh`** — one-way `rsync` from the user's primary Obsidian vault
-  into `vault-mirror/`. Reads configuration from `research-state.yaml` →
+  into `wiki/.vault-mirror/`. Reads configuration from `research-state.yaml` →
   `vault_sync:`. Updates the state file's `last_sync_at` timestamp and emits a
   `vault:sync` event. Excludes `.obsidian/`, `.trash/`, `Attachments/`, and
   `*.canvas` by default.
@@ -164,10 +164,10 @@ references the primary vault.
 
 ~/Repos/MyProject/                      <- THIS REPO (write-heavy)
   wiki/                                 <- project wiki (Obsidian vault)
-  vault-mirror/                         <- read-only mirror of primary vault project notes
+    .vault-mirror/                      <- read-only mirror of primary vault project notes
 ```
 
-The `vault-sync` skill keeps `vault-mirror/` aligned with the primary vault
+The `vault-sync` skill keeps `wiki/.vault-mirror/` aligned with the primary vault
 on demand. The wiki cross-references the primary vault via `obsidian://vault/`
 URIs. The mirror is read-only from the LLM's perspective: edits there are
 overwritten on the next sync, so any changes the user wants reflected in the
