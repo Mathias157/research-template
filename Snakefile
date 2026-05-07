@@ -44,9 +44,6 @@ rule latex_report:
     input:
         main="report/main.tex",
         preamble="report/preamble.tex",
-        sections=expand("report/sections/{num:02d}-{name}.tex",
-                        num=[1, 2, 3, 4],
-                        name=["introduction", "methods", "results", "conclusion"]),
         bib="report/bibliography.bib",
         plot=rules.plot.output,
     output: "build/report.pdf"
