@@ -155,7 +155,7 @@ exit                              # Leave environment
 
 ## LaTeX Development Workflow
 
-This project uses **native LaTeX** (pdflatex via latexmk) instead of Pandoc Markdown.
+This project uses **native LaTeX** (pdflatex via latexmk).
 
 ### Prerequisites
 

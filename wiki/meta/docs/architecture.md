@@ -9,15 +9,7 @@ For the higher-level pattern (why integrate research activities at all?), see
 ## Layer 0 — Reproducible Pipeline
 
 `Snakefile` defines a DAG that turns raw `data/` and a `config/default.yaml`
-into `build/report.html`, `build/report.pdf`, `build/report.docx`, and
-`build/test.success`. Each rule has its own conda environment under `envs/`,
-so the dependency graph is fully captured by:
-
-- `environment.yaml` (top-level: snakemake itself)
-- `envs/default.yaml` (analysis: numpy, pandas, matplotlib)
-- `envs/report.yaml` (rendering: weasyprint, pandoc, pandoc-crossref, katex)
-- `envs/test.yaml` (testing: pytest, pytest-html)
-- `envs/dag.yaml` (visualisation: graphviz)
+into `build/report.pdf` and `build/test.success`. 
 
 `profiles/default/config.yaml` sets `software-deployment-method: conda` so any
 `snakemake` invocation gets conda-managed environments per rule. CI pins this

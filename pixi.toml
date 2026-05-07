@@ -24,7 +24,7 @@ ipdb = "0.13.*"
 # Testing
 pytest = "8.4.*"
 pytest-html = "4.1.*"
-# General Python utilities (kept lightweight after Pandoc removal)
+# General Python utilities
 pip = "25.1.*"
 # DAG visualization
 graphviz = "*"

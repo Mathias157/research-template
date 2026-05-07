@@ -2,7 +2,7 @@
 
 This is a **reproducible-research project template** that combines:
 
-- **Snakemake** pipeline for data → analysis → report (HTML/PDF/DOCX via Pandoc)
+- **Snakemake** pipeline for data → analysis → report (.tex -> .pdf via latexmk)
 - **Conda** environments per pipeline step
 - **OpenCode skills** for the LLM-driven research loop (paper-read, lit-search, research-companion, weekly-review, orchestrate)
 - **Wiki** as the persistent knowledge base (Obsidian-compatible)
@@ -46,9 +46,8 @@ You (the LLM) operate inside this repo. Read this file first, then follow it.
 ├── # Snakemake side
 ├── Snakefile                   # The DAG: data -> analysis -> report + tests
 ├── config/default.yaml         # Pipeline parameters
-├── envs/                       # Conda envs (default, report, test, dag)
 ├── profiles/default/           # Snakemake profile
-├── report/                     # Pandoc Markdown report (compiled to HTML/PDF/DOCX)
+├── report/                     # LaTeX report (will be compiled to PDF with latexmk)
 ├── scripts/                    # Python/R/etc. analysis scripts
 ├── tests/                      # Pytest tests of pipeline outputs
 ├── data/                       # Raw input data (gitkeep)
@@ -130,7 +129,7 @@ Or with vault aliases configured: `[[obs-notes/<note>]]` and `[[<repo-name>/<pag
 
 ### Snakemake Discipline
 
-The repo ships with a working demo pipeline (linear-model fit + plot + Pandoc
+The repo ships with a working demo pipeline (linear-model fit + plot + latexmk
 report). To replace with real analyses:
 
 1. Edit `scripts/model.py` and `scripts/vis.py` (or add new scripts).

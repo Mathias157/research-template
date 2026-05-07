@@ -99,7 +99,7 @@ forgiving than the one above it.
 
 ### Layer 0: The pipeline
 
-Snakemake DAG. Conda envs per rule. Pandoc-rendered report. CI that re-runs
+Snakemake DAG. latexmk-rendered report. CI that re-runs
 on every push. The pipeline is the artefact you ship to a journal: data in,
 report out, with full provenance.
 
