@@ -54,6 +54,7 @@ rule latex_report:
         """
         cd report
         latexmk -pdf main.tex
+        mv ../build/main.pdf ../build/report.pdf
         """
 
 
