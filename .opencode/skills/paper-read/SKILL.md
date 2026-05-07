@@ -28,7 +28,7 @@ Before starting, load context (in parallel):
 1. Read `wiki/index.md` to know what topics/concepts already exist.
 2. Read `research-state.yaml` for current research state.
 3. Read `wiki/wiki.schema.md` for wiki conventions (if ingesting).
-4. Read `principles/academic-writing.md` for writing-quality standards.
+4. Read `wiki/meta/principles/academic-writing.md` for writing-quality standards.
 
 ## Phase 1: LOAD — Accept and Parse the Paper
 

@@ -34,8 +34,8 @@ should I work on?".
 │   └── skills/                 # 7 skills covering the full research loop
 ├── .github/workflows/          # reproduction.yaml + lint.yaml
 ├── hooks/                      # research_hook.sh, auto_commit.sh, vault_sync.sh
-├── principles/                 # academic-writing.md, research-strategy.md
 ├── wiki/                       # Knowledge base (Obsidian vault)
+│   ├── meta/                   # Principles + architecture docs
 │   └── .vault-mirror/          # READ-ONLY mirror of primary Obsidian vault
 ├── Snakefile + scripts/ + tests/ + report/
 ├── pixi.toml + pixi.lock       # Environment + dependency lockfile
@@ -191,8 +191,8 @@ The hook is non-negotiable: humans abandon knowledge bases because maintaining
 cross-references is boring; LLMs don't get bored. The wiki is the system of
 record; everything else (state file, event log, primary vault) feeds it.
 
-Read [docs/PATTERN.md](docs/PATTERN.md) for the higher-level argument and
-[docs/architecture.md](docs/architecture.md) for the implementation walkthrough.
+Read [wiki/meta/docs/PATTERN.md](wiki/meta/docs/PATTERN.md) for the higher-level argument and
+[wiki/meta/docs/architecture.md](wiki/meta/docs/architecture.md) for the implementation walkthrough.
 
 ## License
 

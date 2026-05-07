@@ -4,7 +4,7 @@ The research template has three layers stacked on top of a Snakemake pipeline.
 This document walks through each layer in enough detail to read the source.
 
 For the higher-level pattern (why integrate research activities at all?), see
-[PATTERN.md](./PATTERN.md).
+[[PATTERN]].
 
 ## Layer 0 — Reproducible Pipeline
 

@@ -88,7 +88,7 @@ the events tail, and the wiki staleness, then prints a briefing. The briefing
 is the narrative. From the narrative the human chooses where to go, and the
 session orchestrator routes them.
 
-The reference documentation is here in `docs/architecture.md` and in each
+The reference documentation is here in `wiki/meta/docs/architecture.md` and in each
 SKILL.md. The narrative is in `research-session`. Both exist; they don't
 substitute for each other.
 

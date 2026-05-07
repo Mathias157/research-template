@@ -24,10 +24,11 @@ You (the LLM) operate inside this repo. Read this file first, then follow it.
 │
 ├── .github/workflows/          # CI: snakemake reproduction, lint
 ├── hooks/                      # research_hook.sh, auto_commit.sh, vault_sync.sh
-├── principles/                 # academic-writing.md, research-strategy.md (referenced by skills)
-├── docs/                       # architecture.md, PATTERN.md
 │
 ├── wiki/                       # Knowledge base (Obsidian vault)
+│   ├── meta/                   # Meta-documentation: principles and architecture
+│   │   ├── principles/         # academic-writing.md, research-strategy.md (referenced by skills)
+│   │   └── docs/               # PATTERN.md, architecture.md
 │   ├── topics/                 # THE HEART — thematic pages, 5–15 papers each
 │   ├── concepts/               # Cross-cutting methodological ideas
 │   ├── groups/                 # Research groups
@@ -160,12 +161,12 @@ echo '{"tool_input":{"file_path":"wiki/topics/foo.md"}}' | bash hooks/research_h
 
 ### Principles
 
-Two principle files live at `principles/`:
+Two principle files live at `wiki/meta/principles/`:
 
 - **`academic-writing.md`** — 30 prose-quality principles (referenced by paper-read, orchestrate, anything writing-adjacent).
 - **`research-strategy.md`** — 8 Carlini-derived strategy principles (referenced by idea-critic, research-strategist, research-companion).
 
-Skills load these by reading the file directly (no plugin needed). When a skill says "see principles/X.md", actually read it.
+Skills load these by reading the file directly (no plugin needed). When a skill says "see wiki/meta/principles/X.md", actually read it.
 
 ## Tone & Style
 
@@ -185,5 +186,5 @@ fabricating a missing skill.
 
 1. Read the relevant skill SKILL.md file.
 2. Read the wiki schema (`wiki/wiki.schema.md`).
-3. Read the principles (`principles/research-strategy.md`, `principles/academic-writing.md`).
+3. Read the principles (`wiki/meta/principles/research-strategy.md`, `wiki/meta/principles/academic-writing.md`).
 4. Ask the user one specific question, not five.
