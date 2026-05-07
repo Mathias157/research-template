@@ -7,7 +7,7 @@
 #
 # Run this AFTER cloning the template. It:
 #   - Asks for project metadata (name, short_name, author, institute, primary vault path)
-#   - Substitutes placeholders in research-state.yaml and report/pandoc-metadata.yaml
+#   - Substitutes placeholders in research-state.yaml and report/preamble.tex
 #   - Updates pixi.toml with project short name
 #   - Optionally configures vault_sync (path to primary Obsidian vault + project sub-path)
 #   - Optionally enables auto-commit (touches .autocommit.enabled)
@@ -135,22 +135,33 @@ elif [ -f "$PIXI_FILE" ]; then
     echo "  [check] would update pixi.toml: name -> $PROJECT_SHORT_NAME"
 fi
 
-# 3. report/pandoc-metadata.yaml — substitute title, author, institute, abstract
-META_FILE="$REPO_ROOT/report/pandoc-metadata.yaml"
-if [ -f "$META_FILE" ] && [ "$CHECK_ONLY" -eq 0 ]; then
-    python3 - <<EOF
-import re
-with open("$META_FILE") as f:
+# 3. report/preamble.tex — substitute title and author
+# Pass values via env vars to avoid shell-quoting hell with LaTeX backslashes.
+PREAMBLE_FILE="$REPO_ROOT/report/preamble.tex"
+if [ -f "$PREAMBLE_FILE" ] && [ "$CHECK_ONLY" -eq 0 ]; then
+    PREAMBLE_FILE="$PREAMBLE_FILE" \
+    PROJECT_NAME="$PROJECT_NAME" \
+    AUTHOR="$AUTHOR" \
+    python3 - <<'PYEOF'
+import os, re
+path = os.environ["PREAMBLE_FILE"]
+project_name = os.environ["PROJECT_NAME"]
+author = os.environ["AUTHOR"]
+with open(path) as f:
     text = f.read()
-text = re.sub(r"^title:.*$", "title: $PROJECT_NAME", text, flags=re.M)
-text = re.sub(r"(?<=author:\n    - ).*", "$AUTHOR", text, count=1)
-text = re.sub(r"^institute:.*$", "institute: $INSTITUTE", text, flags=re.M)
-text = re.sub(r"(?<=abstract: \|\n    ).*", "$SHORT_DESCRIPTION", text, count=1)
-with open("$META_FILE", "w") as f:
+# Replace \title{...} and \author{...}; use lambdas to avoid backref interpretation.
+text = re.sub(r"\\title\{[^}]*\}", lambda _m: r"\title{" + project_name + "}", text, count=1)
+text = re.sub(r"\\author\{[^}]*\}", lambda _m: r"\author{" + author + "}", text, count=1)
+with open(path, "w") as f:
     f.write(text)
-EOF
-    action "report/pandoc-metadata.yaml: title, author, institute, abstract"
+PYEOF
+    action "report/preamble.tex: title, author"
+elif [ -f "$PREAMBLE_FILE" ]; then
+    echo "  [check] would update report/preamble.tex: title, author"
 fi
+# Note: abstract lives in main.tex as a placeholder; user customises post-setup.
+# Institute isn't wired into the default LaTeX article class — add a custom
+# command in preamble.tex if you want it on the title page.
 
 # 4. Auto-commit marker
 if [ "$WANT_AUTOCOMMIT" = "yes" ] && [ "$CHECK_ONLY" -eq 0 ]; then
@@ -179,7 +190,7 @@ echo ""
 bold "Done."
 echo ""
 echo "Next steps:"
-echo "  1. Inspect research-state.yaml and report/pandoc-metadata.yaml — adjust if needed."
+echo "  1. Inspect research-state.yaml and report/preamble.tex — adjust if needed."
 echo "  2. pixi will auto-install environments when you run snakemake (no manual activation needed!)."
 echo "  3. Run the demo pipeline:  pixi run --environment default snakemake --use-pixi --cores 4"
 echo "  4. Or, activate pixi shell: pixi shell --environment default"
