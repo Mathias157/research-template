@@ -32,6 +32,7 @@ graphviz = "*"
 ruff = "*"
 yamllint = "*"
 shellcheck = "*"
+cmcrameri = ">=1.9,<2"
 
 # --- Tasks ---
 [tasks]
