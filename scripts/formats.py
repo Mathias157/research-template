@@ -44,15 +44,10 @@ def setup_plot(colourmap: str = "", dark: bool = False):
     plt.rcParams["axes.prop_cycle"] = plt.cycler(  # type: ignore
         color=[
             getattr(cmc, colourmap)(0),
-            getattr(cmc, colourmap)(26),
             getattr(cmc, colourmap)(52),
-            getattr(cmc, colourmap)(78),
             getattr(cmc, colourmap)(104),
-            getattr(cmc, colourmap)(130),
             getattr(cmc, colourmap)(156),
-            getattr(cmc, colourmap)(182),
             getattr(cmc, colourmap)(208),
-            getattr(cmc, colourmap)(234),
             getattr(cmc, colourmap)(257),
         ]
     )
