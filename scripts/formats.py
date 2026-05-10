@@ -43,17 +43,17 @@ def setup_plot(colourmap: str = "", dark: bool = False):
     # Uses a subset of cmcrameri colors that are distinguishable across color-vision deficiencies
     plt.rcParams["axes.prop_cycle"] = plt.cycler(  # type: ignore
         color=[
-            getattr(cmc, colourmap)(0),  # Dark
-            getattr(cmc, colourmap)(0.1),  # Dark
-            getattr(cmc, colourmap)(0.2),  # Dark
-            getattr(cmc, colourmap)(0.3),  # Mid-dark
-            getattr(cmc, colourmap)(0.4),  # Mid-dark
-            getattr(cmc, colourmap)(0.5),  # Mid
-            getattr(cmc, colourmap)(0.6),  # Mid-light
-            getattr(cmc, colourmap)(0.7),  # Mid-light
-            getattr(cmc, colourmap)(0.8),  # Light
-            getattr(cmc, colourmap)(0.9),  # Light
-            getattr(cmc, colourmap)(1),  # Light
+            getattr(cmc, colourmap)(0),
+            getattr(cmc, colourmap)(26),
+            getattr(cmc, colourmap)(52),
+            getattr(cmc, colourmap)(78),
+            getattr(cmc, colourmap)(104),
+            getattr(cmc, colourmap)(130),
+            getattr(cmc, colourmap)(156),
+            getattr(cmc, colourmap)(182),
+            getattr(cmc, colourmap)(208),
+            getattr(cmc, colourmap)(234),
+            getattr(cmc, colourmap)(257),
         ]
     )
 
