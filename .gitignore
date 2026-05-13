@@ -71,3 +71,6 @@ wiki/sources/papers/*.PDF
 # pixi environments
 .pixi/*
 !.pixi/config.toml
+
+wiki/.obsidian/graph.json
+wiki/.obsidian/workspace.json
