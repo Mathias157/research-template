@@ -7,6 +7,7 @@ Edit `rules/` files for additional analysis steps. The demo rules below
 fresh clone — replace them once you have real analyses.
 """
 from pathlib import Path
+from glob import glob
 
 from snakemake.utils import min_version
 
@@ -60,6 +61,9 @@ rule latex_report:
 
 
 rule dag_dot:
+    input:
+        "Snakefile",
+        glob("rules/*.smk")
     output: temp("build/dag.dot")
     shell: "snakemake --rulegraph > {output}"
 
