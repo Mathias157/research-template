@@ -29,7 +29,7 @@ rule run:
         slope=config["slope"],
         x0=config["x0"],
     output: "build/results.pickle"
-    script: "scripts/model.py"
+    script: "analysis/model.py"
 
 
 rule plot:
@@ -41,7 +41,7 @@ rule plot:
         dark_colourmap=config["dark_colourmap"],
         white_colourmap=config["white_colourmap"]
     output: "build/plot.pdf"
-    script: "scripts/vis.py"
+    script: "analysis/vis.py"
 
 
 rule latex_report:
