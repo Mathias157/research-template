@@ -9,7 +9,7 @@ paths:
   wiki: wiki
   events_log: events.jsonl
   principles: principles
-  vault_mirror: wiki/.vault-mirror
+  vault_mirror: docs/.vault-mirror
 
 # Meta about the research domain (edit this after setup.sh).
 domain: "generic"
