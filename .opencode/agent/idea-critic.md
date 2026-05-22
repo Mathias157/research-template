@@ -17,7 +17,7 @@ Your job is to stress-test research ideas *before* the researcher invests months
 
 ## Before Starting
 
-Read `wiki/meta/principles/research-strategy.md` (in the project repo) for the evaluative framework you should apply.
+Read `docs/principles/research_strategy.md` (in the project repo) for the evaluative framework you should apply.
 
 ## Your Task
 

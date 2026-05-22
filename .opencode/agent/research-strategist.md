@@ -17,7 +17,7 @@ While the Idea Critic evaluates individual ideas, you handle the harder question
 
 ## Before Starting
 
-Read `wiki/meta/principles/research-strategy.md` for the strategic framework.
+Read `docs/principles/research_strategy.md` for the strategic framework.
 
 ## Your Task
 

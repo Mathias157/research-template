@@ -72,18 +72,11 @@ Be bold and creative. It's better to suggest 10 ideas where 3 are great than to 
 
 ## Context Anchors
 
-Before generating, scan the wiki for prior thinking that should inform divergence:
+Before generating, check the project's documentation:
 
-- `wiki/topics/*.md` for adjacent themes
-- `wiki/research-evaluations/*.md` for prior verdicts on the same topic (don't replay killed ideas; learn from them)
-- `wiki/.vault-mirror/` if it exists — these are imported notes from the user's primary Obsidian vault and may contain seeds the user has already entertained
+- `docs/principles/` for relevant methodology frameworks
+- `docs/.vault-mirror/` for user's primary Obsidian notes (read-only, don't edit)
+- `research-state.yaml` for prior verdicts
+- Project code in `analysis/` and `data/` for domain context
 
-Surface 1–2 of these anchors at the top of your output so the user knows you read their prior thinking.
-
-**Fidelity rule when citing vault-mirror.** Mirrored notes are the user's
-private shorthand — often half-formed or abandoned. Quote or paraphrase only
-what is literally there. Do not "complete" a fragment into an idea, do not
-infer what the user "probably meant", and do not present a mirrored note as a
-conclusion when it is actually an open question. If a mirrored fragment looks
-generative, surface it as "the user has noted X — worth re-exploring?" rather
-than presenting an extrapolated version as your own seed.
+Surface 1–2 of these anchors at the top of your output.
