@@ -28,3 +28,9 @@ Used by the paper-read skill (critical reading) and all writing-adjacent workflo
 
 These principles are referenced by OpenCode skills and appear in research workflows. See the individual pages for detailed guidance.
 
+```{toctree}
+:maxdepth: 1
+
+principles/academic_writing
+principles/research_strategy
+```

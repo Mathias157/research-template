@@ -1,4 +1,9 @@
-# Get Started
+# Other
 
-Some documentation
+Some other documentation
 
+```{toctree}
+:maxdepth: 1
+
+other/other_doc
+```

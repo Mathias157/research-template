@@ -1,3 +1,3 @@
-# Other Documentation
+# Other 
 
 Some more documentation
