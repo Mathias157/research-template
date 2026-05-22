@@ -70,39 +70,20 @@ with open('$STATE_FILE', 'w') as f:
     fi
 }
 
-# --- Wiki files ---
+# --- Docs principles (replaces old wiki handlers) ---
 case "$FILE_PATH" in
-    */wiki/topics/*|*/wiki/concepts/*|*/wiki/groups/*|*/wiki/syntheses/*|*/wiki/queries/*|*/wiki/entities/*)
-        PAGE_NAME=$(basename "$FILE_PATH" .md)
-        emit_event "wiki:update" "Updated wiki page: $PAGE_NAME" "hook"
+    */docs/principles/*.md)
+        PRINCIPLE=$(basename "$FILE_PATH" .md)
+        emit_event "docs:principles:updated" "Updated principle doc: $PRINCIPLE" "hook"
         update_state_timestamp
-        echo "[Research Hook] Wiki page '$PAGE_NAME' updated."
-        exit 0
-        ;;
-esac
-
-# --- Research evaluations ---
-case "$FILE_PATH" in
-    */wiki/research-evaluations/*.md)
-        DOC_NAME=$(basename "$FILE_PATH" .md)
-        emit_event "research_evaluation:save" "Saved evaluation: $DOC_NAME" "hook"
-        update_state_timestamp
-        echo "[Research Hook] Research evaluation '$DOC_NAME' saved. Will surface in next research-session briefing."
-        exit 0
-        ;;
-esac
-
-# --- Wiki index/log (no suggestion, just track) ---
-case "$FILE_PATH" in
-    */wiki/index.md|*/wiki/log.md|*/wiki/wiki.schema.md)
-        update_state_timestamp
+        echo "[Research Hook] Principle doc '$PRINCIPLE' updated."
         exit 0
         ;;
 esac
 
 # --- Vault-mirror files: read-only mirror, do nothing ---
 case "$FILE_PATH" in
-    */vault-mirror/*)
+    */docs/.vault-mirror/*)
         # Mirror files are managed by hooks/vault_sync.sh and are read-only.
         echo "[Research Hook] vault-mirror file touched — note: vault-mirror is read-only. Edits will be lost on next sync."
         exit 0
