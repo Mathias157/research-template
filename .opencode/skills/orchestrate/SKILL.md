@@ -28,7 +28,7 @@ If the task is purely an academic-writing review or drafting workflow, prefer de
 
 Before deploying any sub-agents:
 
-1. If the task involves academic writing, read `wiki/meta/principles/academic-writing.md` for the 30 writing principles organised in 6 categories.
+1. If the task involves academic writing, read `docs/principles/academic_writing.md` for the 30 writing principles organised in 6 categories.
 2. Read repo-root `AGENTS.md` for project-specific structure and conventions.
 3. Check for project-level agent definitions: glob `.opencode/agent/*.md` in the working directory and read their frontmatter.
 
@@ -153,7 +153,7 @@ Deploy a maximum of **5 parallel sub-agents** per wave. If the task requires mor
 
 ### Result Persistence
 
-After synthesis, write findings to `wiki/queries/orchestration-<topic>.md` so results survive session boundaries. Include: deployment plan, agents deployed, key findings, recommendations.
+After synthesis, write findings to `docs/queries/orchestration-<topic>.md` so results survive session boundaries. Include: deployment plan, agents deployed, key findings, recommendations.
 
 ### File Ownership for Code Changes
 

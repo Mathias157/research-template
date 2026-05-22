@@ -15,13 +15,12 @@ The result is one repo where the *thinking* (documentation + skills) and the *ru
 ## Quickstart
 
 ```bash
-git clone https://github.com/<you>/research-template.git my-project
+git clone https://github.com/Mathias157/research-template.git my-project
 cd my-project
 rm -rf .git
 ./setup.sh                 # interactive wizard: project name, vault sync
-conda env create -f environment.yaml
-conda activate research
-snakemake --cores 4        # build the demo report
+pixi install
+pixi run snakemake --cores 4        # build the demo report
 ```
 
 Then open the repo in OpenCode and start a conversation. The
@@ -163,7 +162,7 @@ This project uses **native LaTeX** (pdflatex via latexmk).
 For automated builds (e.g., CI):
 
 ```bash
-conda activate research
+pixi shell
 snakemake --cores 4
 ```
 
@@ -196,7 +195,7 @@ can fork it.
 ## Companions
 
 - **[Snakemake](https://snakemake.readthedocs.io)** — pipeline DAG
-- **[Conda](https://docs.conda.io)** — environment and dependency management
+- **[Pixi](https://pixi.sh)** — environment and dependency management
 - **[TeX Live](https://tug.org/texlive/)** — LaTeX distribution
 - **[latexmk](https://ctan.org/pkg/latexmk)** — Perl script to automate LaTeX compilation
 - **[vimtex](https://github.com/lervag/vimtex)** — nvim LaTeX plugin

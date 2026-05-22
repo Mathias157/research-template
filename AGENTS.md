@@ -43,7 +43,7 @@ You (the LLM) operate inside this repo. Read this file first, then follow it.
 ├── research-state.yaml         # Read on session start (state)
 ├── events.jsonl                # Append-only event log
 ├── opencode.json               # OpenCode config (registers hooks)
-├── environment.yaml            # Top-level conda env (snakemake)
+├── pixi.toml                   # Top-level pixi env (snakemake)
 ├── setup.sh                    # Init wizard for customising the template
 ├── .autocommit.enabled         # Marker (absent by default) — touch to enable auto-commit
 └── README.md

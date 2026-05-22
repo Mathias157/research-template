@@ -2,17 +2,17 @@
 name: lit-search
 description: >-
   Map a subfield by discovering, organising, and cross-linking research papers into a
-  persistent, wiki-integrated lit workspace. ACTIVATE EAGERLY when the user wants to
+  persistent, docs-integrated lit workspace. ACTIVATE EAGERLY when the user wants to
   build a literature review, survey a subfield, do a paper search, find related work, or
   map what exists on a topic. Triggers: "find me papers on...", "what papers exist
   about...", "related work for...", "literature search", "paper survey", or any
   conference/venue name. Maintains per-topic memory-bank.md, mind-graph.md, and
-  references.bib under wiki/queries/<topic>/.
+  references.bib under docs/queries/<topic>/.
 ---
 
 # Lit-Search — Persistent Literature Mapping Workspace
 
-You are the **Lit-Search Agent** — you help the researcher map a subfield by running disciplined, multi-angle paper searches and curating the results into a persistent per-topic workspace that lives inside the wiki.
+You are the **Lit-Search Agent** — you help the researcher map a subfield by running disciplined, multi-angle paper searches and curating the results into a persistent per-topic workspace that lives in docs.
 
 ## Activation Triggers (eager invocation)
 
@@ -25,34 +25,33 @@ ACTIVATE this skill when the user says:
 
 ## Relationship to Other Skills
 
-- **paper-read** handles a single paper end-to-end (read → analyse → discuss → ingest into `wiki/entities/` or topic pages). Use it for deep engagement with one paper.
+- **paper-read** handles a single paper end-to-end (read → analyse → discuss → deep-read notes in docs). Use it for deep engagement with one paper.
 - **research-companion DEEPEN phase** does one-shot literature triangulation around a *specific idea*. Use it when evaluating an idea, not when mapping a subfield.
 - **This skill (lit-search)** fills the gap: persistent, iterative subfield mapping with a per-topic workspace you can return to across sessions.
 
-**Graduation path:** lit-search (discovery) → paper-read (deep-read per paper) → `wiki/topics/` or `wiki/syntheses/` (refined).
+**Graduation path:** lit-search (discovery) → paper-read (deep-read per paper) → refined docs pages.
 
 ## Directory Layout
 
-Each topic gets its own folder under `wiki/queries/<topic>/`. The folder name is a short, descriptive kebab-case slug (e.g., `mixed-resolution-diffusion/`, `micro-macro-validation-abm/`). If the user passes `@<topic>` as input, resume in that folder; otherwise derive the slug from the search phrase.
+Each topic gets its own folder under `docs/queries/<topic>/`. The folder name is a short, descriptive kebab-case slug (e.g., `mixed-resolution-diffusion/`, `micro-macro-validation-abm/`). If the user passes `@<topic>` as input, resume in that folder; otherwise derive the slug from the search phrase.
 
 ```
-wiki/queries/<topic>/
+docs/queries/<topic>/
   memory-bank.md        # Master list of all discovered papers (append-only)
   mind-graph.md         # Topic-centric hierarchy linking papers to sub-themes
   references.bib        # Combined BibTeX for all papers
   discussions/          # Paper comparison logs (when user asks to compare)
 ```
 
-**Do not** create `summaries/` or `pdfs/` inside the workspace. Per-paper summaries live in `wiki/entities/` or inside topic pages (via paper-read). Downloaded PDFs live in `wiki/sources/papers/` (via paper-read). This keeps a single source of truth — the wiki.
+**Do not** create `summaries/` or `pdfs/` inside the workspace. Per-paper deep-read notes live in `docs/papers/` (via paper-read). This keeps a single source of truth.
 
 ## Context Load (Before Searching)
 
 Before any search, in parallel:
 
-1. Read `wiki/index.md` and `wiki/queries/<topic>/memory-bank.md` (if it exists) to avoid duplicate discoveries.
-2. `glob wiki/topics/*.md` and `wiki/syntheses/*.md` to spot existing wiki coverage of the topic — if a topic page already exists, flag it before creating a new lit-search workspace.
-3. Read `wiki/wiki.schema.md` (page types, naming conventions, linking rules).
-4. If `wiki/.vault-mirror/` is non-empty, `grep` it for the topic — the user may have prior notes on this subfield. **Fidelity rule:** treat mirrored notes as evidence of what the user has thought about, not as prompts to elaborate. Quote or paraphrase only what is literally there.
+1. Read `docs/index.md` and `docs/queries/<topic>/memory-bank.md` (if it exists) to avoid duplicate discoveries.
+2. Read `docs/docs.schema.md` (page types, naming conventions, linking rules).
+3. If `docs/.vault-mirror/` is non-empty, `grep` it for the topic — the user may have prior notes on this subfield. **Fidelity rule:** treat mirrored notes as evidence of what the user has thought about, not as prompts to elaborate. Quote or paraphrase only what is literally there.
 
 Announce to the user what prior coverage exists, then proceed.
 
@@ -115,11 +114,11 @@ Last updated: YYYY-MM-DD
 ---
 ```
 
-`short-id` convention: `firstauthorlastname-keyword-year` (e.g., `chopra-limits-agency-2025`) — matches `wiki/entities/` filenames so paper-read hand-offs stay consistent.
+`short-id` convention: `firstauthorlastname-keyword-year` (e.g., `chopra-limits-agency-2025`) — matches `docs/papers/` filenames so paper-read hand-offs stay consistent.
 
 ## `mind-graph.md` Format
 
-Topic-centric hierarchy, NOT pairwise paper comparisons. Each sub-theme has 1–3 umbrella/landmark papers plus other relevant work. Think of it as an outline for the eventual `wiki/topics/` or `wiki/syntheses/` page.
+Topic-centric hierarchy, NOT pairwise paper comparisons. Each sub-theme has 1–3 umbrella/landmark papers plus other relevant work. Think of it as an outline for the eventual docs page or synthesis.
 
 ```markdown
 # Mind Graph — <topic>
@@ -140,17 +139,17 @@ Single combined `references.bib` with all papers. Use `@inproceedings` for confe
 
 ## Per-Paper Summaries and Comparisons
 
-- **Summaries**: Do NOT auto-summarise. When the user asks for depth on a specific paper, invoke the paper-read skill (read its SKILL.md) with the paper's URL or arXiv ID. paper-read produces the deep-read entity page at `wiki/entities/<short-id>.md`. Then set `Status: deep-read` and fill `Wiki link:` in `memory-bank.md`.
-- **Comparisons**: When the user asks to compare 2+ papers, first check that deep-reads exist for each (if not, offer to run paper-read on the missing ones). Save the comparison to `wiki/queries/<topic>/discussions/<descriptive-name>.md`.
-- **Re-reads**: Before opening the original PDF again, check `wiki/entities/<short-id>.md` and `memory-bank.md` — only re-fetch if the user explicitly asks.
+- **Summaries**: Do NOT auto-summarise. When the user asks for depth on a specific paper, invoke the paper-read skill (read its SKILL.md) with the paper's URL or arXiv ID. paper-read produces the deep-read notes at `docs/papers/<short-id>.md`. Then set `Status: deep-read` and fill `Wiki link:` in `memory-bank.md`.
+- **Comparisons**: When the user asks to compare 2+ papers, first check that deep-reads exist for each (if not, offer to run paper-read on the missing ones). Save the comparison to `docs/queries/<topic>/discussions/<descriptive-name>.md`.
+- **Re-reads**: Before opening the original PDF again, check `docs/papers/<short-id>.md` and `memory-bank.md` — only re-fetch if the user explicitly asks.
 
 ## PDF Management
 
-Do NOT download PDFs into the lit-search workspace. When the user wants a PDF, hand off to paper-read; it will save the PDF to `wiki/sources/papers/` following wiki conventions.
+Do NOT download PDFs into the lit-search workspace. When the user wants a PDF, hand off to paper-read; it will manage PDF storage according to docs conventions.
 
 ## Interaction Flow
 
-1. **Scope the topic.** Confirm the exact technical distinction. Surface any existing `wiki/topics/` or `wiki/queries/<topic>/` coverage.
+1. **Scope the topic.** Confirm the exact technical distinction. Surface any existing docs page coverage.
 2. **Search.** Run the direct-concept searches, then the mandatory multi-angle round. Present results as a ranked table (short-id, title, venue, year, citations, tier, one-line note).
 3. **Record.** Append to `memory-bank.md`, update `mind-graph.md`, append entries to `references.bib`.
 4. **Event-log.** Append to `events.jsonl`:
@@ -161,9 +160,9 @@ Do NOT download PDFs into the lit-search workspace. When the user wants a PDF, h
 
 5. **Offer next step.** Present these options and let the user pick:
    - **Deep-read a paper** → run paper-read with the URL/arXiv id
-   - **Compare papers** → write to `wiki/queries/<topic>/discussions/<name>.md`
+   - **Compare papers** → write to `docs/queries/<topic>/discussions/<name>.md`
    - **Extend search** → another round on a new sub-angle
-   - **Promote to topic page** → draft `wiki/topics/<slug>.md` from `mind-graph.md` when coverage feels saturated
+   - **Promote to docs page** → draft docs page from `mind-graph.md` when coverage feels saturated
    - **Triangulate with an idea** → run research-companion pre-loaded with these references
    - **Done for now** → update state and stop
 
@@ -171,16 +170,15 @@ Do NOT download PDFs into the lit-search workspace. When the user wants a PDF, h
 
 When `mind-graph.md` has stabilised (≥ 8–10 papers, sub-themes feel coherent), suggest graduating it:
 
-- **To a topic page** (`wiki/topics/<slug>.md`): when the user intends the lit-search to be a field survey. Use the schema from `wiki/wiki.schema.md` → Topic Page.
-- **To a synthesis page** (`wiki/syntheses/<slug>.md`): when the lit-search produced a cross-cutting thesis (not just a landscape summary).
-- **To a research evaluation** (`wiki/research-evaluations/YYYY-MM-DD-<slug>.md`): if the lit-search was triggered by idea-evaluation, hand off to research-companion Phase 5–6.
+- **To a docs page**: when the user intends the lit-search to be a field survey or topic overview. Use the schema from `docs/docs.schema.md`.
+- **To a research evaluation** (`docs/research-evaluations/YYYY-MM-DD-<slug>.md`): if the lit-search was triggered by idea-evaluation, hand off to research-companion Phase 5–6.
 
-After graduation, the `wiki/queries/<topic>/` workspace stays — it's the audit trail.
+After graduation, the `docs/queries/<topic>/` workspace stays — it's the audit trail.
 
 ## Orchestration Rules
 
-- **Do not duplicate wiki content.** The workspace is a scratchpad; topic/entity pages are the canonical record. When a paper has a `wiki/entities/` page, the `memory-bank.md` entry should link to it and stop there — don't re-summarise.
+- **Do not duplicate docs content.** The workspace is a scratchpad; docs pages are the canonical record. When a paper has deep-read notes, the `memory-bank.md` entry should link to it and stop there — don't re-summarise.
 - **The multi-angle round is not optional.** If you catch yourself presenting a result table after only direct-concept searches, stop and run the three angles.
 - **Prefer the user's vocabulary in the short-id and mind-graph**, but make sure the memory-bank captures synonyms in `Notes:` so future searches don't miss the paper.
-- **Chain, don't reimplement.** Deep-reading, ingesting, and PDF download all belong to paper-read. Idea triangulation belongs to research-companion. Stay in your lane.
+- **Chain, don't reimplement.** Deep-reading, ingesting, and PDF management all belong to paper-read. Idea triangulation belongs to research-companion. Stay in your lane.
 - **Condense, don't extrapolate.** Memory-bank `Abstract` and `Notes` fields paraphrase the paper's own wording. Do not infer findings the abstract doesn't state. Mind-graph descriptions summarise the user's stated framing of sub-themes — do not invent a new taxonomy of the field. See "Fidelity Discipline" in the repo-root `AGENTS.md`.

@@ -26,11 +26,10 @@ When activated, IMMEDIATELY follow Phase 1 — don't ask permission, don't parap
 
 Read these files to build a complete picture (in parallel where possible):
 
-1. **`research-state.yaml`** at repo root — current state (wiki stats, recent activity, suggested actions, recent_research_evaluations).
+1. **`research-state.yaml`** at repo root — current state (docs stats, recent activity, suggested actions, recent_research_evaluations).
 2. **`events.jsonl`** — last 10–15 events for recent activity context.
 3. **`AGENTS.md`** at repo root — project structure and conventions.
-4. **Wiki staleness check** — Glob `wiki/topics/*.md` and `wiki/concepts/*.md`, check `last_reviewed` dates in frontmatter for pages older than 60 days.
-5. **`wiki/.vault-mirror/`** if non-empty — read the index and any recently-touched notes (these are mirrored from the user's primary Obsidian vault). **Fidelity rule:** when summarising mirrored notes in the briefing, quote or paraphrase only what is literally there. Do not infer the user's conclusions from fragmentary notes — surface them as open threads instead. See "Fidelity Discipline" in the repo-root `AGENTS.md`.
+4. **`docs/.vault-mirror/`** if non-empty — read the index and any recently-touched notes (these are mirrored from the user's primary Obsidian vault). **Fidelity rule:** when summarising mirrored notes in the briefing, quote or paraphrase only what is literally there. Do not infer the user's conclusions from fragmentary notes — surface them as open threads instead. See "Fidelity Discipline" in the repo-root `AGENTS.md`.
 
 If any of these files don't exist, note it but continue — the system is resilient to missing components.
 
@@ -43,8 +42,7 @@ Research Briefing — [Date]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Knowledge Base
-  [N] wiki pages ([topics] topics, [concepts] concepts, [evals] research-evaluations)
-  [Stale pages if any, or "All pages current"]
+  [N] doc pages ([topics] topics, [concepts] concepts, [evals] research-evaluations)
   Last ingestion: [paper name] on [date], or "No papers ingested yet"
 
 Active Threads
@@ -69,11 +67,10 @@ Keep the briefing under 20 lines. Dense, not verbose.
 
 Prioritize suggestions by urgency:
 
-1. **Stale wiki pages** (>60 days) — "N wiki pages haven't been reviewed. Consider a wiki lint."
-2. **Unresolved writing findings** — "You have N unresolved review findings on [file]."
-3. **Vault-mirror drift** — "M project notes in primary vault have changed since last sync. Run vault-sync skill?"
-4. **Recent momentum** — If events show recent paper ingestion without follow-up, suggest deepening; if recent brainstorming without verdict, suggest closing the loop.
-5. **Open-ended** — Always include "What's on your mind?" as the last option.
+1. **Unresolved writing findings** — "You have N unresolved review findings on [file]."
+2. **Vault-mirror drift** — "M project notes in primary vault have changed since last sync. Run vault-sync skill?"
+3. **Recent momentum** — If events show recent paper ingestion without follow-up, suggest deepening; if recent brainstorming without verdict, suggest closing the loop.
+4. **Open-ended** — Always include "What's on your mind?" as the last option.
 
 If the user provided a specific focus, tailor the briefing and skip to that activity.
 
@@ -89,7 +86,7 @@ Tell the user: "Switching to paper-read mode."
 ### "Lit search" / "Map a subfield" / "Literature review" / "Related work"
 
 → Read `.opencode/skills/lit-search/SKILL.md` and follow it.
-Tell the user: "Starting a persistent lit-search workspace at `wiki/queries/<topic>/`."
+Tell the user: "Starting a persistent lit-search workspace at `docs/queries/<topic>/`."
 
 ### "Brainstorm" / "Explore" / "New direction" / "What if..."
 
@@ -102,13 +99,13 @@ Tell the user: "Starting a structured ideation session."
 
 → Read `.opencode/skills/weekly-review/SKILL.md` and follow it.
 
-### "Wiki" / "Update knowledge base"
+### "Docs" / "Update knowledge base"
 
 Handle directly:
 
-- "wiki lint" → run the lint protocol from `wiki/wiki.schema.md`
-- "wiki query: [question]" → search and synthesise across pages
-- "update [topic]" → edit the relevant wiki page
+- "docs lint" → run the lint protocol from `docs/docs.schema.md`
+- "docs query: [question]" → search and synthesise across pages
+- "update [topic]" → edit the relevant docs page
 
 ### "Sync from vault" / "Pull from primary vault"
 
@@ -127,7 +124,7 @@ After completing one activity, don't just stop. Suggest the natural next step ba
 | Read a paper | Brainstorm implications via research-companion, or read a related paper |
 | Brainstorming | Close the loop — produce a research-evaluation, or update the relevant topic page |
 | Lit search | Pick a Tier-1 paper for deep-read via paper-read |
-| Wiki update | Check for stale pages or run a lint |
+| Docs update | Run a lint on the knowledge base |
 
 Always offer "Done for now" as an option. Don't force continued work.
 
@@ -148,16 +145,16 @@ When the user is done (says "done", "that's it", "wrap up", or moves to unrelate
 2. **Emit session event** to `events.jsonl`:
 
    ```jsonl
-   {"ts":"...","type":"session:complete","detail":"Read 1 paper, 1 evaluation, updated topic","source":"research-session"}
+   {"ts":"...","type":"session:complete","detail":"Read 1 paper, 1 evaluation, updated doc","source":"research-session"}
    ```
 
 3. **Update `research-state.yaml`** with any changes from the session (new ingestions, etc.). The hook handles `last_updated` automatically; you update content fields as needed.
 
 4. **Advise on manual commit** (if needed):
-   - Describe what files were changed this session (wiki pages, state, events).
+   - Describe what files were changed this session (docs pages, state, events).
    - Remember: agents never commit. It's the user's responsibility.
 
-5. **Preview next session**: "For next time: you have [N] stale pages, and [suggestion]."
+5. **Preview next session**: "For next time: you have [suggestion]."
 
 ## Orchestration Rules
 

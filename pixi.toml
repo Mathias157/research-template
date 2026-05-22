@@ -33,6 +33,11 @@ ruff = "*"
 yamllint = "*"
 shellcheck = "*"
 cmcrameri = ">=1.9,<2"
+sphinx = ">=8.2.3,<9"
+sphinx-rtd-theme = ">=3.1.0,<4"
+sphinx-autoapi = ">=3.8.0,<4"
+sphinx-copybutton = ">=0.5.2,<0.6"
+myst-parser = ">=5.1.0,<6"
 
 # --- Tasks ---
 [tasks]
@@ -41,3 +46,6 @@ test = "snakemake test --cores 4"
 dag = "snakemake dag --cores 1"
 clean = "snakemake clean"
 "clean-all" = "snakemake clean && rm -rf build/"
+_docs-build = { cmd = "sphinx-build docs build/html", description = "Build the Sphinx documentation" }
+_docs-serve = { cmd = "python -m http.server 8000", cwd = "build/html", description = "Serve the built documentation on http://127.0.0.1:8000" }
+docs = { depends-on = ["_docs-build", "_docs-serve"], description = "Build the documentation and serve it on http://127.0.0.1:8000" }

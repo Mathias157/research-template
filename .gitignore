@@ -57,16 +57,17 @@ Thumbs.db
 *~
 
 # Vault sync mirror — pulled from primary Obsidian vault, never edit here
-wiki/.vault-mirror/**
-!wiki/.vault-mirror/.gitkeep
-!wiki/.vault-mirror/README.md
+docs/.vault-mirror/**
+!docs/.vault-mirror/.gitkeep
+!docs/.vault-mirror/README.md
 
 # Large attachments mirrored alongside notes — keep out of git
-wiki/sources/papers/*.pdf
-wiki/sources/papers/*.PDF
+docs/sources/papers/*.pdf
+docs/sources/papers/*.PDF
 # pixi environments
 .pixi/*
 !.pixi/config.toml
 
-wiki/.obsidian/graph.json
-wiki/.obsidian/workspace.json
+docs/.obsidian/graph.json
+docs/.obsidian/workspace.json
+docs/superpowers
