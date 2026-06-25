@@ -7,10 +7,17 @@
 import cmcrameri.cm as cmc
 import matplotlib.pyplot as plt
 import yaml
+import pandas as pd
 
 # ------------------------------- #
 #          1. Functions           #
 # ------------------------------- #
+
+testdf = pd.DataFrame({
+    "date": pd.date_range("2023-01-01", periods=5),
+    "value": [10, 20, 30, 40, 50],
+    "name": ["Freja", "Odin", "Ida", "Sven", "Bjørg"],
+})
 
 
 def setup_plot(
